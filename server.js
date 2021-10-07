@@ -18,6 +18,13 @@ app.get("/", function (request, response) {
 });
 
 //START OF YOUR CODE...
+app.get("/quotes", (request, response)=>{
+  response.send(quotes);
+});
+
+app.get("/quotes/random", (request, response) =>{
+  response.send(pickFromArray(quotes));
+});
 
 //...END OF YOUR CODE
 
