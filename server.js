@@ -18,36 +18,43 @@ app.get("/", function (request, response) {
 });
 
 //START OF YOUR CODE...
-app.get("/quotes", (request, response)=>{
+app.get("/quotes", (request, response) => {
   response.send(quotes);
 });
 
-app.get("/quotes/random", (request, response) =>{
+app.get("/quotes/random", (request, response) => {
   response.send(pickFromArray(quotes));
 });
 
-app.get("/quotes/search", (request, response) =>{
+app.get("/quotes/search", (request, response) => {
   const searchValue = request.query.term.toLowerCase();
-  const searchFilter = searchValue ? quotes.filter(quote =>quote.quote.toLowerCase().includes(searchValue)) : [];
+  const searchFilter = searchValue
+    ? quotes.filter((quote) => quote.quote.toLowerCase().includes(searchValue))
+    : [];
   response.send(searchFilter);
 });
 
-app.get("/quotes/search", (request, response) =>{
+app.get("/quotes/search", (request, response) => {
   const searchValue = request.query.term.toLowerCase();
-  const searchFilter = searchValue ? quotes.filter(quote =>quote.quote.toLowerCase().includes(searchValue)) : [];
+  const searchFilter = searchValue
+    ? quotes.filter((quote) => quote.quote.toLowerCase().includes(searchValue))
+    : [];
   response.send(searchFilter);
 });
 
 //Otra forma de hacerlo, explicado en clase:
-// app.get("/quotes/search", (request, response) =>{
-//   const searchValue = request.query.term.toLowerCase();
-//   const searchFilter = quotes.filter((quoteObj) => {
-//     const lowerCaseQuote = quoteObj.quote.toLowerCase();
-//     const lowerCaseAutor = quoteObj.author.toLowerCase();
-//     return lowerCaseQuote.includes(searchValue) || lowerCaseAutor.includes(searchValue);
-//   });
-//   response.send(searchFilter);
-// });
+app.get("/quotes/search", (request, response) => {
+  const searchValue = request.query.term.toLowerCase();
+  const searchFilter = quotes.filter((quoteObj) => {
+    const lowerCaseQuote = quoteObj.quote.toLowerCase();
+    const lowerCaseAutor = quoteObj.author.toLowerCase();
+    return (
+      lowerCaseQuote.includes(searchValue) ||
+      lowerCaseAutor.includes(searchValue)
+    );
+  });
+  response.send(searchFilter);
+});
 
 //...END OF YOUR CODE
 
@@ -62,6 +69,6 @@ function pickFromArray(arr) {
 //Start our server so that it listens for HTTP requests!
 let port = 5000;
 
-app.listen( port, function () {
+app.listen(port, function () {
   console.log("Your app is listening on port " + port);
 });
