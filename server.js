@@ -4,7 +4,10 @@ const { response } = require("express");
 
 //load the 'express' module which makes writing webservers easy
 const express = require("express");
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 //load the quotes JSON
 const quotes = require("./quotes.json");
